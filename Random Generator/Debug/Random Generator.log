@@ -1,0 +1,15 @@
+﻿Build started 2016-03-07 23:59:45.
+     1>Project "E:\Skróty\programowanie bierzące\1a repozytorium\Random Generator\Random Generator\Random Generator.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         E:\Programy 2\VS comunity\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib "Random Generator.cpp"
+         Random Generator.cpp
+     1>Random Generator.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+       Link:
+         E:\Programy 2\VS comunity\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Skróty\programowanie bierzące\1a repozytorium\Random Generator\Random Generator\Debug\Random Generator.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:Debug\RandomGenerator.Rand.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\Skróty\programowanie bierzące\1a repozytorium\Random Generator\Random Generator\Debug\Random Generator.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 "Debug\Random Generator.obj"
+         "Debug\.NETFramework,Version=v4.5.2.AssemblyAttributes.obj"
+         Random Generator.vcxproj -> E:\Skróty\programowanie bierzące\1a repozytorium\Random Generator\Random Generator\Debug\Random Generator.exe
+     1>Done Building Project "E:\Skróty\programowanie bierzące\1a repozytorium\Random Generator\Random Generator\Random Generator.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.26
