@@ -1,6 +1,8 @@
 #pragma once
 
 #include<math.h>
+#include<stdlib.h>
+#include<time.h>
 
 namespace RandomGenerator {
 	////////////////////
@@ -42,11 +44,17 @@ namespace RandomGenerator {
 	/////////////////////////////////////////////////
 	private: Double lam = 0;
 	private: Double alfa = 0;
+	private: Double mi = 0;
+	private: Double ro = 0;
 	private: Double x;
 	private: Double n;
 	private: Double pi = 3.14;
 	private: int a = 0;
 	private: Double fun = 0;
+	private: Double c = 0;
+	private: Random^ rand = gcnew Random(); ///liczby pseudolosowe
+	private: Double rand_max = RAND_MAX + 1;
+	private: Double randomDouble = 0;
 	///////////////////////////////////////////////
 
 
@@ -65,6 +73,7 @@ namespace RandomGenerator {
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::TextBox^  lambda;
 	private: System::Windows::Forms::Label^  label4;
+
 
 	/// potrzebne metody
 	///////////////////////////////////////////////////////
@@ -161,7 +170,7 @@ namespace RandomGenerator {
 			series1->BorderColor = System::Drawing::Color::Silver;
 			series1->ChartArea = L"ChartArea";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
-			series1->Color = System::Drawing::Color::Black;
+			series1->Color = System::Drawing::Color::Crimson;
 			series1->Name = L"Series";
 			this->chart->Series->Add(series1);
 			this->chart->Size = System::Drawing::Size(598, 465);
@@ -294,43 +303,62 @@ namespace RandomGenerator {
 
 
 	private: System::Void gen_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		x = Double::Parse(X->Text);
+		n = Double::Parse(N->Text);
+		alfa = Double::Parse(alf->Text);
+		lam = Double::Parse(lambda->Text);
+		this->mi = Double::Parse(alf->Text);
+		this->ro = Double::Parse(lambda->Text);
+		this->c = Double::Parse(lambda->Text);
 		
-			x = Double::Parse(X->Text);
-			n = Double::Parse(N->Text);
-			alfa = Double::Parse(alf->Text);
-			lam = Double::Parse(lambda->Text);
-			
+		if (this->x == NULL || this->n == NULL || this->alfa == NULL || this->lam == NULL) {
+			MessageBox::Show("Pole lub pola tekstowe puste. W celu generacji, wype³nij wszystkie", "info",
+				MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+		else {
+
 			if (cauchyGen->Checked && a == 0) {
 				for (Int16 i = x; i < n; i++) {
 					fun = ((1 / this->pi) * lam / (pow(lam, 2) + pow(((Double)i - alfa), 2)));
-					this->chart->Series["Series"]->Points->AddXY(i,fun);
+					this->chart->Series["Series"]->Points->AddXY(i, fun);
 				}
 				a++;
 			}
 
 			if (this->levy->Checked && a == 0) {
 				for (Int16 i = x; i < n; i++) {
-					//fun = 
+					fun = sqrt(this->c / (2 * this->pi)) * exp((-1.0*c) / 
+						(2 * (i - this->mi))) / (pow((i - this->mi), 1.5));
 					this->chart->Series["Series"]->Points->AddXY(i, fun);
-				}
-				a++;
-			}
-			
-			if (this->gauss->Checked && a == 0) {
-				for (Int16 i = x; i < n; i++) {
-					 fun = 1 / (lam*sqrt(2 * this->pi)) * exp(-(pow((i - alfa) / lam, 2)));
-					 this->chart->Series["Series"]->Points->AddXY(i, fun);
 				}
 				a++;
 			}
 
-			if (this->row->Checked && a == 0) {
+			if (this->gauss->Checked && a == 0) {
 				for (Int16 i = x; i < n; i++) {
-					//fun = 
+					fun = 1 / (this->ro *sqrt(2 * this->pi)) * exp(-(pow((i - this->mi) / this->ro, 2)));
 					this->chart->Series["Series"]->Points->AddXY(i, fun);
 				}
 				a++;
 			}
+	
+			if (this->row->Checked && a == 0) {
+				for (Int16 i = x; i < n; i++) {
+					this->randomDouble = rand->NextDouble();
+					fun = mi*sqrt(-2 * log((randomDouble + 1) / rand_max))*
+						sin(2 * pi*randomDouble / rand_max) + ro;
+					this->chart->Series["Series"]->Points->AddXY(i, fun);
+				}
+				a++;
+			}
+
+			if (this->a > 1) {
+				MessageBox::Show("Wykres zosta³ ju¿ wygenerowany. Zalecane wyczyszczenie", "Uwaga!",
+					MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			}
+
+		}
 
 	}
 
@@ -343,12 +371,21 @@ private: System::Void cauchyGen_CheckedChanged(System::Object^  sender, System::
 private: System::Void gauss_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	this->label1->Text = "X";
 	this->label2->Text = "N";
-	this->label3->Text = "Mi";
-	this->label4->Text = "Ro";
+	this->label3->Text = "     Mi";
+	this->label4->Text = "       Ro";
 }
 private: System::Void levy_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	this->label1->Text = "X";
+	this->label2->Text = "N";
+	this->label3->Text = "     Mi";
+	this->label4->Text = "       C";
 }
 private: System::Void row_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	this->label1->Text = "X";
+	this->label2->Text = "N";
+	this->label3->Text = "     Mi";
+	this->label4->Text = "       Ro";
 }
+
 };
 }
